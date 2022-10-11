@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Postagem } from './postagem/entities/postagem.entity';
+import { PostagemModule } from './postagem/postagem.module';
+import { Tema } from './tema/entities/tema.entity';
+import { TemaModule } from './tema/entities/tema.module';
 
 
 @Module({
@@ -12,9 +15,11 @@ import { Postagem } from './postagem/entities/postagem.entity';
       username: 'root',
       password: 'root',
       database: 'db_blogpessoal',
-      entities: [Postagem],
+      entities: [Postagem, Tema],
       synchronize: true
-    })
+    }),
+    PostagemModule, //Fez o modulo principal ligar com o postagem
+    TemaModule
   ],
   controllers: [],
   providers: [],
