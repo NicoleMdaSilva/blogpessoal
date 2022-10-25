@@ -1,12 +1,14 @@
 import { Controller, Get } from "@nestjs/common";
-import { Body, Delete, HttpCode, Param, Post, Put } from "@nestjs/common/decorators";
+import { Body, Delete, HttpCode, Param, Post, Put, UseGuards } from "@nestjs/common/decorators";
 import { HttpStatus } from "@nestjs/common/enums";
 import { ParseIntPipe } from "@nestjs/common/pipes";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { Tema } from "../entities/tema.entity";
 import { TemaService } from "../services/tema.service";
 
 
 @Controller('/tema')
+@UseGuards(JwtAuthGuard)
 export class TemaController{
     constructor (private readonly temaService: TemaService){}
 

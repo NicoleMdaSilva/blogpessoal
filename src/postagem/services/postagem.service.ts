@@ -2,23 +2,26 @@ import { Injectable } from "@nestjs/common";
 import { HttpStatus } from "@nestjs/common/enums";
 import { HttpException } from "@nestjs/common/exceptions";
 import { InjectRepository } from "@nestjs/typeorm";
-import { DeleteResult, ILike, Like, Repository } from "typeorm";
+import { TemaService } from "src/tema/services/tema.service";
+import { DeleteResult, ILike, Repository } from "typeorm";
 import { Postagem } from "../entities/postagem.entity";
 
 //Service faz pegar as informações do banco
 @Injectable() //É o jeito que acessamos a tabela
 export class PostagemService{
-  temaService: any;
+  
     constructor ( 
         @InjectRepository(Postagem) //Por o repositorio
-        private postagemRepository: Repository<Postagem> //O repositorio precisa da postagem
+        private postagemRepository: Repository<Postagem>, //O repositorio precisa da postagem
+        private temaService: TemaService
     ){}
 
     //Vai criar outro programa para ser rapido
     async findAll(): Promise<Postagem[]>{   //Promise é uma promeça que ele vai retornar
       return await this.postagemRepository.find({
         relations: {
-          tema: true
+          tema: true,
+          usuario: true
         }
       });
     } 
@@ -30,7 +33,8 @@ export class PostagemService{
           id
         },
         relations: {
-          tema: true
+          tema: true,
+          usuario: true
         }
       })
 
@@ -46,14 +50,15 @@ export class PostagemService{
         titulo: ILike(`%${titulo}%`)
       },
         relations: {
-          tema: true
+          tema: true,
+          usuario: true
         }
     });
    }
 
    async create(postagem: Postagem): Promise<Postagem>{
     if(postagem.tema){
-      let tema = await this.temaService.findById(postagem.tema)
+      let tema = await this.temaService.findById(postagem.tema.id)
 
       if(!tema)
         throw new HttpException('Tema não encontrado', HttpStatus.NOT_FOUND)
@@ -69,7 +74,7 @@ export class PostagemService{
         throw new HttpException('Postagem não encontrada', HttpStatus.NOT_FOUND);
 
       if(postagem.tema){
-        let tema = await this.temaService.findById(postagem.tema)
+        let tema = await this.temaService.findById(postagem.tema.id)
 
         if(!tema)
           throw new HttpException('Tema não encontrado', HttpStatus.NOT_FOUND)

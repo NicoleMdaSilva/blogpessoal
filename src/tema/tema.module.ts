@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common/decorators/modules/module.decorator";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { TemaController } from "../controllers/tema.controller";
-import { TemaService } from "../services/tema.service";
-import { Tema } from "./tema.entity";
+import { TemaController } from "./controllers/tema.controller";
+import { TemaService } from "./services/tema.service";
+import { Tema } from "./entities/tema.entity";
 
 
 @Module({

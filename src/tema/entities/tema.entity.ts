@@ -7,13 +7,12 @@ import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from
 export class Tema{
 
     @PrimaryGeneratedColumn()
-    id: number;
+    public id: number;
 
     @IsNotEmpty()
     @Column({length: 255, nullable: false})
-    descricao: string;
+    public descricao: string;
 
     @OneToMany(() => Postagem, (postagem) => postagem.tema)
     postagem: Postagem[];
-    static id: any;
 }
