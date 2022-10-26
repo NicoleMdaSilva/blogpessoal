@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { HttpStatus } from "@nestjs/common/enums";
 import { HttpException } from "@nestjs/common/exceptions";
 import { InjectRepository } from "@nestjs/typeorm";
-import { TemaService } from "src/tema/services/tema.service";
+import { TemaService } from "../../tema/services/tema.service";
 import { DeleteResult, ILike, Repository } from "typeorm";
 import { Postagem } from "../entities/postagem.entity";
 
