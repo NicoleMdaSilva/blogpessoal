@@ -1,8 +1,8 @@
 # compiled output
 /dist
 /node_modules
-constants
 package-lock.json
+src/auth/constants
 
 # Logs
 logs
