@@ -2,6 +2,7 @@
 /dist
 /node_modules
 constants
+package-lock.json
 
 # Logs
 logs
