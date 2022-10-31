@@ -2,12 +2,14 @@ import { Controller, Get } from "@nestjs/common";
 import { Body, Delete, HttpCode, Param, Post, Put, UseGuards } from "@nestjs/common/decorators";
 import { HttpStatus } from "@nestjs/common/enums";
 import { ParseIntPipe } from "@nestjs/common/pipes";
+import { ApiTags,ApiBearerAuth  } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { Tema } from "../entities/tema.entity";
 import { TemaService } from "../services/tema.service";
 
-
+@ApiTags('Tema')
 @Controller('/tema')
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 export class TemaController{
     constructor (private readonly temaService: TemaService){}
