@@ -3,7 +3,7 @@ import { HttpStatus } from "@nestjs/common/enums";
 import { HttpException } from "@nestjs/common/exceptions";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeleteResult, ILike, Like, Repository } from "typeorm";
-import { Tema } from "../entities/Tema.entity";
+import { Tema } from "../entities/tema.entity";
 
 
 //Service faz pegar as informações do banco
